@@ -12,45 +12,50 @@
   <img src="assets/readme-figure.png" alt="CryoEM Refinement Utilities overview" width="100%">
 </p>
 
-**Figure 1.** The overview figure highlights the intended loop: load particle or volume representations, refine the model, measure reconstruction quality, and inspect FSC curves before the next run.
+## Abstract
 
-## Scope
+This repository is a conference-style artifact for cryo-EM refinement experiments and reconstruction diagnostics. It packages the code and notes needed to inspect the central research question: How can refinement variants be compared using lightweight scripts and FSC-style checks? The emphasis is on transparent entry points, reproducible execution, and clear separation between code, local data, and generated outputs.
 
-This repository is organized as a conference-style research artifact for refinement scripts and FSC diagnostics. This project groups lightweight refinement scripts for cryo-EM experiments, with separate entry points for volume-level and point-level refinement plus plotting utilities for Fourier shell correlation diagnostics.
+## Artifact at a Glance
 
-The README is structured for fast inspection by reviewers and future collaborators: it states the artifact scope, the main entry points, the reproduction path, and the outputs that should be checked after a run.
+| Item | Details |
+| --- | --- |
+| Research question | How can refinement variants be compared using lightweight scripts and FSC-style checks? |
+| Primary artifact | Python refinement scripts and plotting utilities. |
+| Main entry points | `e2gmm_refine.py`, `e2gmm_refine_point.py`, `my_plotfsc.py` |
+| Expected outputs | Refined reconstructions, point-level diagnostics, and FSC plots. |
 
-## Artifact Contents
+## Repository Structure
 
-| Component | Role |
+| Item | Details |
 | --- | --- |
 | `e2gmm_refine.py` | main refinement script for the reconstruction workflow. |
 | `e2gmm_refine_point.py` | point-based refinement variant for geometry-focused experiments. |
 | `my_plotfsc.py` | utility for plotting FSC-style quality curves. |
 
-## Reproduction Guide
+## Reproducibility Protocol
 
 1. `git clone git@github.com:Hik289/cryoem_new.git`
 2. `python -m venv .venv && source .venv/bin/activate`
 3. `python -m pip install -U pip numpy scipy matplotlib`
 4. Run the refinement scripts with the dataset paths required by your experiment environment.
+5. Record the data window, random seed, software versions, machine type, and exact command used for any full rerun.
+6. Store regenerated figures, tables, checkpoints, or reports under the existing result folders instead of overwriting raw inputs.
 
-For a full rerun, record the data window, random seed, software versions, machine type, and command used for each experiment. Keep raw datasets outside Git unless they are small public fixtures.
+## Evaluation Protocol
 
-## Experimental Workflow
-
-| Stage | What to Check |
+| Step | Reviewer-facing check |
 | --- | --- |
-| Setup | Confirm local data paths, environment packages, and any MATLAB or notebook paths before running experiments. |
-| Run | Execute the smallest script or notebook first, then scale to the full experiment once outputs match expectations. |
-| Inspect | Compare generated figures, logs, tables, and saved result folders against the intended analysis. |
-| Extend | Add new experiments as separate scripts or notebooks with explicit names instead of overwriting existing artifacts. |
+| Environment | Confirm the listed runtime or notebook environment starts without modifying tracked files. |
+| Minimal run | Execute the smallest entry point before launching longer experiments. |
+| Output check | Compare regenerated files with the expected figures, tables, logs, or reports named in this README. |
+| Extension check | Add new runs as separate scripts, notebooks, or result folders with explicit names. |
 
-## Expected Outputs
+## Expected Results
 
-- Recreated figures, tables, notebooks, reports, or saved result files from the listed entry points.
-- A clear mapping from each experiment command to its generated output location.
-- Updated notes when a script depends on local data, private paths, or external software.
+- The main scripts or notebooks should regenerate the project-specific artifacts listed in **Artifact at a Glance**.
+- Outputs should be traceable to a command, parameter setting, and data window.
+- Any private data path or machine-specific setting should be documented before sharing the artifact externally.
 
 ## Paper or Reference
 
@@ -58,7 +63,7 @@ No external paper link is currently attached to this project. For now, the code,
 
 ## Citation
 
-If this repository supports academic work, cite the linked paper when available. Otherwise cite the repository version used in your experiment.
+If this repository supports a paper, cite the paper first and the artifact version second. If no paper is attached, cite the repository snapshot used in the experiment.
 
 ```bibtex
 @misc{cryoem_new_artifact_2026,
@@ -66,7 +71,7 @@ If this repository supports academic work, cite the linked paper when available.
   author = {Hik289},
   year = {2026},
   howpublished = {\url{https://github.com/Hik289/cryoem_new}},
-  note = {Research artifact}
+  note = {Conference-style research artifact}
 }
 ```
 
@@ -74,11 +79,11 @@ If this repository supports academic work, cite the linked paper when available.
 
 No explicit license file is included yet. Add one before public reuse, redistribution, or package release.
 
-## Reviewer Notes
+## Reviewer Checklist
 
-| Item | Status |
+| Claim | How to inspect it |
 | --- | --- |
-| Code | Included in this repository. |
-| Data | Expected to be configured locally unless a small fixture is committed. |
-| Environment | Base dependencies are listed in the reproduction guide; pin a lockfile for archival release. |
-| Results | Store generated artifacts under the existing result, report, log, or output folders. |
+| Code availability | Code and notebooks are present in the repository. |
+| Reproducibility | The protocol above gives the expected setup and run order. |
+| Result traceability | Generated outputs should live in named result, report, log, or output folders. |
+| Extensibility | New experiments should preserve existing artifacts and add clearly named outputs. |
